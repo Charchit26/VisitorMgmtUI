@@ -31,17 +31,17 @@ class Home extends Component {
     render() {
         return (
             <Grid divided='vertically' verticalAlign='middle'>
-                <div align='center' style={{width: '100%', paddingBottom: '4%', paddingTop: '5%', backgroundColor: 'darkGreen', color: 'white'}}>
+                <div align='center' style={{width: '100%', paddingBottom: '2%', paddingTop: '2%', backgroundColor: 'darkGreen', color: 'white'}}>
                     <Grid.Row  style={{width: '30%', marginLeft: '35%', marginRight: '35%'}}>
                         <h1>Welcome To ....</h1> 
                         <br/>
                         
                     </Grid.Row>
                 </div>
-                <Grid.Row centered columns={2}>
+                <Grid.Row centered columns={2} style={{height: '30%'}}>
                     <Grid.Column floated='left'>
-                        <div align='center' style={{marginLeft: '15%', marginRight: '15%', marginTop: '5%'}}>
-                            <div style={{fontWeight: 'bold', marginBottom: '3%'}}> Already generated QR code? Scan it here...</div>
+                        <div align='center' style={{marginLeft: '15%', marginRight: '15%', width: '60%'}}>
+                            <div style={{fontWeight: 'bold', fontSize: '150%', marginBottom: '3%'}}> Already generated QR code? Scan it here...</div>
                             <QrReader delay={this.state.delay} onError={this.handleError} onScan={this.handleScan} style={{width: '100%', height: '100%'}}>
                             </QrReader> 
                         </div>
@@ -53,8 +53,8 @@ class Home extends Component {
                 </Grid.Row>
                 <Grid.Row centered columns={2}>
                     <Grid.Column>
-                        <div align='center' style={{marginLeft: '15%', marginRight: '15%', marginTop: '5%'}}>
-                            <div style={{fontWeight: 'bold', fontSize: '200%', marginBottom: '10%'}}> Fresh visitor? </div>
+                        <div align='center' style={{marginLeft: '15%', marginRight: '15%', marginTop: '2%'}}>
+                            <div style={{fontWeight: 'bold', fontSize: '200%', marginBottom: '5%'}}> Fresh visitor? </div>
                             <a href='/newVisitor'><Button positive>Click Here</Button></a>
                         </div>
                     </Grid.Column>
