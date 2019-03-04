@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Grid, Icon, Input, Segment} from 'semantic-ui-react';
+import {Divider, Grid, Icon, Input, Segment} from 'semantic-ui-react';
 import QRReader from './QRReader';
 
 class Home extends Component {
@@ -12,10 +12,12 @@ class Home extends Component {
                     </Grid.Column>
 
                     <Grid.Column verticalAlign='middle' width={8} >
-                        <Input size='huge' style={{width: '100%'}} icon={<Icon name='search' inverted circular link/>} placeholder='Search...'/>
+                        <div style={{width: '100%'}} >
+                        <Input action={{ icon: 'search' }} placeholder='Enter code manually...' />
+                        </div>
                     </Grid.Column>
                 </Grid>
-
+                <Divider vertical>OR</Divider>
             </Segment>
         )
     }
