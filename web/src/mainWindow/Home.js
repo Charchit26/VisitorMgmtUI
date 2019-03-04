@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Button, Grid, Header, Image, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import Input from 'semantic-ui-react/dist/commonjs/elements/Input';
+import WebcamCapture from '../components/WebcamCapture';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modalOpen: false,
+            imageSrc: '',
         };
 
         var userAgent = navigator.userAgent.toLowerCase();
@@ -24,6 +26,11 @@ class Home extends Component {
     };
 
     closeModal = () => this.setState({modalOpen: false});
+
+    getEmployeeImage = (imageSrc) => {
+        this.setState({imageSrc: imageSrc});
+        console.log(imageSrc)
+    };
 
     render() {
         return (
@@ -55,8 +62,7 @@ class Home extends Component {
                 <Modal dimmer='blurring' size='large' open={this.state.modalOpen} onClose={this.closeModal} closeIcon>
                     <Modal.Header>Employee Self Check In</Modal.Header>
                     <Modal.Content image>
-                        <Image wrapped size='medium'
-                               src='https://react.semantic-ui.com/images/avatar/large/rachel.png'/>
+                        <WebcamCapture setImage={this.getEmployeeImage}/>
                         <Modal.Description>
                             <Header>Enter the employee ID</Header>
                             <Input action='Search' placeholder='Search...'/>
