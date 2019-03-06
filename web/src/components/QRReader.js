@@ -23,12 +23,12 @@ class QRReader extends React.Component {
 
     render() {
         return (
-            <div>
-                <div style={{fontWeight: 'bold', fontSize: '150%', marginBottom: '3%'}}> Please scan your QR code
+            <div align="center">
+                <div style={{fontWeight: 'bold', fontSize: '170%', marginBottom: '3%'}}> Please scan your QR code
                     here...
-                </div>
+                </div><br/>
                 <QrReader delay={this.state.delay} onError={this.handleError} onScan={this.handleScan}
-                          style={{width: '100%', height: '100%'}}>
+                          style={{width: '80%', height: '80%'}}>
                 </QrReader>
             </div>
         )

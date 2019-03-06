@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Grid, Header, Image, Modal} from 'semantic-ui-react';
+import {Button, Grid, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
-import Input from 'semantic-ui-react/dist/commonjs/elements/Input';
-import WebcamCapture from '../components/WebcamCapture';
+import EmployeeCheckIn from '../components/EmployeeCheckIn';
 
 class Home extends Component {
     constructor(props) {
@@ -59,16 +58,8 @@ class Home extends Component {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
-                <Modal dimmer='blurring' size='large' open={this.state.modalOpen} onClose={this.closeModal} closeIcon>
-                    <Modal.Header>Employee Self Check In</Modal.Header>
-                    <Modal.Content image>
-                        <WebcamCapture setImage={this.getEmployeeImage}/>
-                        <Modal.Description>
-                            <Header>Enter the employee ID</Header>
-                            <Input action='Search' placeholder='Search...'/>
-                        </Modal.Description>
-                    </Modal.Content>
-                </Modal>
+
+                    <EmployeeCheckIn modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
             </div>
         )
     }
