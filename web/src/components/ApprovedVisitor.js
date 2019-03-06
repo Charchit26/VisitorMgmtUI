@@ -3,6 +3,14 @@ import {Divider, Grid, Input, Segment} from 'semantic-ui-react';
 import QRReader from './QRReader';
 
 class Home extends Component {
+    componentDidMount() {
+        this.inputRef.focus()
+    }
+
+    handleRef = (c) => {
+        this.inputRef = c
+    };
+
     render() {
         return (
             <Segment placeholder style={{marginTop: '10%'}}>
@@ -12,8 +20,8 @@ class Home extends Component {
                     </Grid.Column>
 
                     <Grid.Column verticalAlign='middle' width={8}>
-                        <div style={{width: '100%'}}>
-                            <Input action={{icon: 'search'}} placeholder='Enter code manually...'/>
+                        <div>
+                            <Input ref={this.handleRef} action={{icon: 'search'}} placeholder='Enter code manually...' style={{width: '80%', height: '60px'}}/>
                         </div>
                     </Grid.Column>
                 </Grid>

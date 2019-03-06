@@ -39,7 +39,7 @@ class Home extends Component {
                     <Grid.Row verticalAlign='middle'>
                         <Grid.Column width={11} style={{marginTop: '-20%', paddingLeft: '10%'}}>
                             <h1>Welcome to &lt;The Company&gt;</h1>
-                            <h3>Please choose your visitor type</h3>
+                            <h3>Please choose one of these options --> </h3>
                         </Grid.Column>
                         <Grid.Column width={5}
                                      style={{backgroundColor: 'lightGrey', paddingTop: '25%', paddingBottom: '25%'}}>
