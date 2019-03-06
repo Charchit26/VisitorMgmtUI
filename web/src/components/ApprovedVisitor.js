@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import {Button, Divider, Grid, Input, Segment} from 'semantic-ui-react';
+import {Button, Divider, Grid, Header, Icon, Input, Segment} from 'semantic-ui-react';
 import QRReader from './QRReader';
 
 class ApprovedVisitor extends Component {
-    componentDidMount() {
-        this.inputRef.focus()
-    }
-
-    handleRef = (c) => {
-        this.inputRef = c
-    };
-
     goBack = () => {
         this.props.history.push('/');
     };
@@ -29,8 +21,12 @@ class ApprovedVisitor extends Component {
 
                         <Grid.Column verticalAlign='middle' width={8}>
                             <div>
-                                <Input ref={this.handleRef} action={{icon: 'search', size: 'huge'}}
-                                       placeholder='Enter code manually...'
+                                <Header as="h2">
+                                    <Icon name='search' />
+                                    Enter Code manually
+                                </Header><br/>
+                                <Input autoFocus action={{icon: 'search', size: 'huge'}}
+                                       placeholder='Search...'
                                        style={{width: '70%', height: '60px', fontSize: '170%'}}/>
                             </div>
                         </Grid.Column>

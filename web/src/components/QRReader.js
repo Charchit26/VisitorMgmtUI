@@ -1,5 +1,6 @@
 import React from 'react';
 import QrReader from "react-qr-reader";
+import {Header, Icon} from 'semantic-ui-react';
 
 class QRReader extends React.Component {
     constructor(props) {
@@ -24,9 +25,10 @@ class QRReader extends React.Component {
     render() {
         return (
             <div align="center">
-                <div style={{fontWeight: 'bold', fontSize: '170%', marginBottom: '3%'}}> Please scan your QR code
-                    here...
-                </div><br/>
+                <Header as="h2">
+                    <Icon name='qrcode'/>
+                    Please scan your QR code here
+                </Header><br/>
                 <QrReader delay={this.state.delay} onError={this.handleError} onScan={this.handleScan}
                           style={{width: '80%', height: '80%'}}>
                 </QrReader>

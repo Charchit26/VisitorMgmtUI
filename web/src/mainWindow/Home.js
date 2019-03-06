@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Grid, Modal} from 'semantic-ui-react';
+import {Button, Grid} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import EmployeeCheckIn from '../components/EmployeeCheckIn';
 
@@ -59,7 +59,7 @@ class Home extends Component {
                     </Grid.Row>
                 </Grid>
 
-                    <EmployeeCheckIn modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
+                <EmployeeCheckIn modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
             </div>
         )
     }
