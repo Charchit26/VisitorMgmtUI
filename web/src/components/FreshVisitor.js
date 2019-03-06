@@ -12,6 +12,8 @@ class FreshVisitor extends Component {
         this.state = {
             pageShown: 1,
             visitorType: '',
+            timeIn: Date.now(),
+            timeOut: Date.now()+4*60*60*1000,
         }
     }
 
@@ -24,6 +26,7 @@ class FreshVisitor extends Component {
     };
 
     render() {
+        console.log(this.state.timeIn, this.state.timeOut)
         const {pageShown, visitorType} = this.state;
         return (
             <Segment.Group horizontal style={{marginTop: '20%'}}>
