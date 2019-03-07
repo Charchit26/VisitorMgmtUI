@@ -5,6 +5,7 @@ import GetDetailsFamily from './FreshVisitorScreens/GetDetailsFamily';
 import GetDetailsInterviewee from './FreshVisitorScreens/GetDetailsInterviewee';
 import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
+import GatePass from './FreshVisitorScreens/GatePass';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -29,6 +30,16 @@ class FreshVisitor extends Component {
         this.setState({timeOut: data.value}, () => console.log(this.state.timeOut));
     };
 
+    handleSubmit = () => {
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'post',
+        }).then(response => response.json())
+            .then((json) => {
+                console.log(json);
+                this.setState({pageShown: 3});
+            })
+    };
+
     render() {
         const {pageShown, visitorType, timeOut} = this.state;
         console.log(timeOut)
@@ -41,12 +52,12 @@ class FreshVisitor extends Component {
                 }
                 <Segment style={{width: '70%'}}>
                     {pageShown === 1 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
-                    {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily/>}
-                    {pageShown === 2 && visitorType === 'INT' && <GetDetailsInterviewee/>}
-                    {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor/>}
+                    {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily onSubmit={this.handleSubmit}/>}
+                    {pageShown === 2 && visitorType === 'INT' && <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
+                    {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
                     {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
-                                                                                  handleTimeOutChange={this.handleTimeOutChange}/>}
-                    {pageShown === 3 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
+                                                                                  handleTimeOutChange={this.handleTimeOutChange} onSubmit={this.handleSubmit}/>}
+                    {pageShown === 3 && <GatePass/>}
                     {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                 </Segment>
                 {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}

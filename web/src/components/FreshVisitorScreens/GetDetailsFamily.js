@@ -38,7 +38,7 @@ class GetDetailsFamily extends Component {
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        <Button positive type="submit" content="Submit"/>
+                        <Button positive type="submit" content="Submit" onClick={this.props.onSubmit}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

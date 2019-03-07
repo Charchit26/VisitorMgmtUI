@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dropdown, Grid, Input} from 'semantic-ui-react';
+import {Button, Dropdown, Grid, Input} from 'semantic-ui-react';
 
 class GetDetailsInterviewee extends Component {
     IDType = [
@@ -33,6 +33,11 @@ class GetDetailsInterviewee extends Component {
                 <Grid.Row>
                     <Grid.Column width={4}>Enter reference HR's email Id</Grid.Column>
                     <Grid.Column width={12}><Input style={{width: '100%'}}/></Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Button positive type="submit" content="Submit" onClick={this.props.onSubmit}/>
+                    </Grid.Column>
                 </Grid.Row>
             </Grid>
         )

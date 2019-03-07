@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dropdown, Grid, Input} from 'semantic-ui-react';
+import {Button, Dropdown, Grid, Input} from 'semantic-ui-react';
 import {DateTimeInput} from 'semantic-ui-calendar-react';
 
 class GetDetailsGuest extends Component {
@@ -9,12 +9,12 @@ class GetDetailsGuest extends Component {
         {text: 'Passport', value: 'PA'},
     ];
 
-    state={
+    state = {
         timeOut: this.props.timeOut,
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.timeOut) {
+        if (nextProps.timeOut) {
             this.setState({timeOut: nextProps.timeOut})
         }
     }
@@ -57,6 +57,11 @@ class GetDetailsGuest extends Component {
                             onChange={this.props.handleTimeOutChange}
                             style={{width: '100%'}}
                         />
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Button positive type="submit" content="Submit" onClick={this.props.onSubmit}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
