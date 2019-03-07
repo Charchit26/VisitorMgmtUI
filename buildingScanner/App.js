@@ -41,7 +41,8 @@ export default class App extends Component {
                     }
                 })
                 .then(response => response.json())
-                .then(json => alert('Validity of QR --> '+json));
+                .then(json => alert('Validity of QR --> '+json))
+                .catch(() => { alert('Invalid QR OR something went wrong')});
             this.setState({lastScannedUrl: result.data});
         }
     };
