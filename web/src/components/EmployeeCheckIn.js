@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Header, Input, Modal} from 'semantic-ui-react';
-import {hashHistory} from 'react-router';
 import {Link} from 'react-router-dom';
 
 
