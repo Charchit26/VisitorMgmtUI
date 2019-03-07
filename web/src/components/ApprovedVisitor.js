@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
-import {Button, Divider, Grid, Header, Icon, Input, Segment} from 'semantic-ui-react';
+import {Divider, Grid, Header, Icon, Input, Segment} from 'semantic-ui-react';
 import QRReader from './QRReader';
+import {Link} from 'react-router-dom';
 
 class ApprovedVisitor extends Component {
-    goBack = () => {
-        this.props.history.push('/');
-    };
-
-
     render() {
         return (
             <div>
-                <Button content='Go Back' negative icon={'arrow left'} onClick={this.goBack}
-                        style={{marginTop: '10%', marginLeft: '87%', fontSize: '130%'}}/>
+                <Link to='/'>
+                    <div style={{marginLeft: '-90%', marginTop: '2%'}}>
+                        <p>Home</p>
+                        <Icon name='home' size='big'/>
+                    </div>
+                </Link>
+                <br/>
+                <br/>
+                <br/>
                 <Segment placeholder>
                     <Grid columns={2} relaxed='very' stackable>
                         <Grid.Column width={8} floated='left'>
@@ -22,7 +25,7 @@ class ApprovedVisitor extends Component {
                         <Grid.Column verticalAlign='middle' width={8}>
                             <div>
                                 <Header as="h2">
-                                    <Icon name='search' />
+                                    <Icon name='search'/>
                                     Enter Code manually
                                 </Header><br/>
                                 <Input autoFocus action={{icon: 'search', size: 'huge'}}

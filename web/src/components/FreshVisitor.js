@@ -6,6 +6,7 @@ import GetDetailsInterviewee from './FreshVisitorScreens/GetDetailsInterviewee';
 import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
 import GatePass from './FreshVisitorScreens/GatePass';
+import {Link} from 'react-router-dom';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -44,24 +45,34 @@ class FreshVisitor extends Component {
         const {pageShown, visitorType, timeOut} = this.state;
         console.log(timeOut)
         return (
-            <Segment.Group horizontal style={{marginTop: '20%'}}>
-                {pageShown !== 1 &&
-                <div>
-                    <Icon size='huge' name='arrow alternate circle left' onClick={this.handleBackClick}/>
-                </div>
-                }
-                <Segment style={{width: '70%'}}>
-                    {pageShown === 1 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
-                    {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily onSubmit={this.handleSubmit}/>}
-                    {pageShown === 2 && visitorType === 'INT' && <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
-                    {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
-                    {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
-                                                                                  handleTimeOutChange={this.handleTimeOutChange} onSubmit={this.handleSubmit}/>}
-                    {pageShown === 3 && <GatePass/>}
-                    {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
-                </Segment>
-                {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}
-            </Segment.Group>
+            <div>
+                <Link to='/'>
+                    <div style={{marginLeft: '-90%', marginTop: '2%'}}>
+                        <p>Home</p>
+                        <Icon name='home' size='big'/>
+                    </div>
+                </Link>
+                <Segment.Group horizontal style={{marginTop: '20%'}}>
+                    {pageShown !== 1 &&
+                    <div>
+                        <Icon size='huge' name='arrow alternate circle left' onClick={this.handleBackClick}/>
+                    </div>
+                    }
+                    <Segment style={{width: '70%'}}>
+                        {pageShown === 1 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
+                        {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily onSubmit={this.handleSubmit}/>}
+                        {pageShown === 2 && visitorType === 'INT' &&
+                        <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
+                        {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
+                        {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
+                                                                                      handleTimeOutChange={this.handleTimeOutChange}
+                                                                                      onSubmit={this.handleSubmit}/>}
+                        {pageShown === 3 && <GatePass/>}
+                        {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
+                    </Segment>
+                    {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}
+                </Segment.Group>
+            </div>
         )
     }
 }
