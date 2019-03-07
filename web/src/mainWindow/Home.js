@@ -8,7 +8,6 @@ class Home extends Component {
         super(props);
         this.state = {
             modalOpen: false,
-            imageSrc: '',
         };
 
         var userAgent = navigator.userAgent.toLowerCase();
@@ -25,11 +24,6 @@ class Home extends Component {
     };
 
     closeModal = () => this.setState({modalOpen: false});
-
-    getEmployeeImage = (imageSrc) => {
-        this.setState({imageSrc: imageSrc});
-        console.log(imageSrc)
-    };
 
     render() {
         return (
