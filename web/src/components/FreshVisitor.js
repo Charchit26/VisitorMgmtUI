@@ -12,8 +12,8 @@ class FreshVisitor extends Component {
         this.state = {
             pageShown: 1,
             visitorType: '',
-            timeIn: Date.now(),
-            timeOut: Date.now()+4*60*60*1000,
+            timeIn: new Date().getTime(),
+            timeOut: (new Date().getTime() + 4 * 60 * 60 * 1000),
         }
     }
 
@@ -25,22 +25,27 @@ class FreshVisitor extends Component {
         this.setState((prevState) => ({pageShown: prevState.pageShown - 1}))
     };
 
+    handleTimeOutChange = (e, data) => {
+        this.setState({timeOut: data.value}, () => console.log(this.state.timeOut));
+    };
+
     render() {
-        console.log(this.state.timeIn, this.state.timeOut)
-        const {pageShown, visitorType} = this.state;
+        const {pageShown, visitorType, timeOut} = this.state;
+        console.log(timeOut)
         return (
             <Segment.Group horizontal style={{marginTop: '20%'}}>
                 {pageShown !== 1 &&
-                <Segment>
+                <div>
                     <Icon size='huge' name='arrow alternate circle left' onClick={this.handleBackClick}/>
-                </Segment>
+                </div>
                 }
                 <Segment style={{width: '70%'}}>
                     {pageShown === 1 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily/>}
                     {pageShown === 2 && visitorType === 'INT' && <GetDetailsInterviewee/>}
                     {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor/>}
-                    {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest/>}
+                    {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
+                                                                                  handleTimeOutChange={this.handleTimeOutChange}/>}
                     {pageShown === 3 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                 </Segment>

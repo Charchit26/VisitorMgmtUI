@@ -9,6 +9,16 @@ class GetDetailsGuest extends Component {
         {text: 'Passport', value: 'PA'},
     ];
 
+    state={
+        timeOut: this.props.timeOut,
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if(nextProps.timeOut) {
+            this.setState({timeOut: nextProps.timeOut})
+        }
+    }
+
     render() {
         return (
             <Grid style={{fontSize: '140%'}}>
@@ -44,6 +54,7 @@ class GetDetailsGuest extends Component {
                             name="dateTime"
                             placeholder="Date Time"
                             iconPosition="left"
+                            onChange={this.props.handleTimeOutChange}
                             style={{width: '100%'}}
                         />
                     </Grid.Column>
