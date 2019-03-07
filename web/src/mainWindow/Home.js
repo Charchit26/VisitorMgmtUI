@@ -33,27 +33,27 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <Grid columns={2} centered style={{height: '100vh'}}>
+        		<div style={{backgroundImage: 'url("images/b2.jpg")', backgroundRepeat:'no-repeat',backgroundSize:'cover',paddingTop:'10%'}}>
+                <Header />
+                <Grid columns={2} centered style={{height: '90vh'}}>
                     <Grid.Row verticalAlign='middle'>
-                        <Grid.Column width={11} style={{marginTop: '-20%', paddingLeft: '10%'}}>
-                            <h1>Welcome to &lt;The Company&gt;</h1>
-                            <h3>Please choose one of these options --> </h3>
+                        <Grid.Column width={9} style={{ marginTop: '-15%', paddingLeft: '10%'}}>
+                            <h1 className='h1'>Welcome to VisitorManagement System</h1>
                         </Grid.Column>
-                        <Grid.Column width={5}
-                                     style={{backgroundColor: 'lightGrey', paddingTop: '25%', paddingBottom: '25%'}}>
+                        <Grid.Column width={6}
+                                     style={{paddingTop: '5%',marginTop: '-10%'}}>
                             <Link to="/approvedVisitor">
                                 <Button content='Pre-approved Visitor' size='huge' primary className='visitor-btn'
-                                        style={{marginBottom: '20%', marginLeft: '15%'}}/>
+                                        style={{marginBottom: '25%', marginLeft: '15%',padding:'10%'}}/>
                             </Link>
                             <br/>
                             <Link to="/freshVisitor">
                                 <Button content='Fresh Visitor' size='huge' positive className='visitor-btn'
-                                        style={{marginBottom: '20%', marginLeft: '15%'}}/>
+                                        style={{marginBottom: '25%', marginLeft: '15%',padding:'10%'}}/>
                             </Link>
                             <br/>
                             <Button content='Employee' size='huge' negative className='visitor-btn'
-                                    style={{marginBottom: '20%', marginLeft: '15%'}}
+                                    style={{marginBottom: '25%', marginLeft: '15%',padding:'10%'}}
                                     onClick={this.handleEmployeeClick}/>
                         </Grid.Column>
                     </Grid.Row>
