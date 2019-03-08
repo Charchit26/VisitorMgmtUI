@@ -19,3 +19,13 @@ code {
 .visitor-btn {
   width: 70%;
 }
+
+.navbar{
+  background-color: black;
+  margin-top: -10%;
+}
+
+.h1{
+  font-size: 50px;
+  font-weight: bolder;
+}
