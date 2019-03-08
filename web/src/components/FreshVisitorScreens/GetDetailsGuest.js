@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
 import {DateTimeInput} from 'semantic-ui-calendar-react';
-import {IDType} from '../../constants/IDProofType';
-import {THIS_CITY} from '../../constants/Constants';
+import {IDType, THIS_CITY} from '../../constants/Constants';
 
 class GetDetailsGuest extends Component {
     constructor(props) {
