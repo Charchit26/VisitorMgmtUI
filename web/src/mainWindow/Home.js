@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Grid} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import EmployeeCheckIn from '../components/EmployeeCheckIn';
+import Header from './Header';
 
 class Home extends Component {
     constructor(props) {

@@ -32,17 +32,30 @@ export default class App extends Component {
     _handleBarCodeRead = result => {
         if (result.data !== this.state.lastScannedUrl) {
             LayoutAnimation.spring();
+            let data = JSON.stringify({
+                "qrString": result.data
+            });
             fetch('https://qr-manager.cfapps.io/qr-manager/verify',
                 {
-                    method: 'post',
-                    headers: {'Content-Type': 'application/json'},
-                    body: {
-                        "qrString": result.data
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+                    body: data
+                })
+                .then(response => {
+                    if(response.status === 200) {
+                        response.json()
+                    } else {
+                        return Promise.reject(response)
                     }
                 })
-                .then(response => response.json())
-                .then(json => alert('Validity of QR --> '+json))
-                .catch(() => { alert('Invalid QR OR something went wrong')});
+                .then(() => {
+                    alert('Valid QR!!');
+                })
+                .catch((err) => {
+                    console.log('Erorr Occurred ----------> ', err);
+                    alert('Invalid QR OR something went wrong ')
+
+                });
             this.setState({lastScannedUrl: result.data});
         }
     };
@@ -60,8 +73,8 @@ export default class App extends Component {
                         : <BarCodeScanner
                             onBarCodeRead={this._handleBarCodeRead}
                             style={{
-                                height: Dimensions.get('window').height,
-                                width: Dimensions.get('window').width,
+                                height: Dimensions.get('window').height - 700,
+                                width: Dimensions.get('window').width - 150,
                             }}
                         />}
 

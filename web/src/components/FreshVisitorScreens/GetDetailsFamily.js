@@ -17,7 +17,7 @@ class GetDetailsFamily extends Component {
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={4}>Enter your email</Grid.Column>
-                    <Grid.Column width={12}><Input style={{width: '100%'}}/></Grid.Column>
+                    <Grid.Column width={12}><Input  style={{width: '100%'}}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={4}>Enter your phone num</Grid.Column>
