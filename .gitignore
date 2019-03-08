@@ -62,5 +62,3 @@ fabric.properties
 .idea/httpRequests
 
 .DS_Store
-/web/node_modules/
-/buildingScanner/node_modules/
