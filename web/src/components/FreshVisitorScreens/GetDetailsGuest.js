@@ -86,7 +86,7 @@ class GetDetailsGuest extends Component {
         })
             .then(response => response.json())
             .then((json) => {
-                if (json.jobLevel && json.jobLevel >= 5) {
+                if (json.jobLevel && json.jobLevel >= 6) {
                     this.setState({jobLevelError: false})
                 } else {
                     this.setState({jobLevelError: true})
@@ -157,7 +157,7 @@ class GetDetailsGuest extends Component {
                                                    onBlur={this.checkJobLevel}/></Grid.Column>
                     {jobLevelError &&
                     <Message style={{marginLeft: '1%'}} negative size='mini'>
-                        <p>Please enter a valid email ID of an employee with JL >= 5</p>
+                        <p>Please enter a valid email ID of an employee with JL >= 6</p>
                     </Message>}
                 </Grid.Row>
                 <Grid.Row>

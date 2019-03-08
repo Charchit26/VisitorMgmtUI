@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Checkbox, Dropdown, Grid, Input} from 'semantic-ui-react';
 import {IDType, THIS_CITY} from '../../constants/Constants';
+import {DateTimeInput} from 'semantic-ui-calendar-react';
 
 class GetDetailsFamily extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class GetDetailsFamily extends Component {
             idType: 'AD',
             idNumber: '',
             refEmpId: '',
+            timeOut: '',
             emailError: false,
             phoneNumError: false,
         }
@@ -65,6 +67,14 @@ class GetDetailsFamily extends Component {
         this.setState({refEmpId: e.target.value}, this.checkErrors);
     };
 
+    handleTimeOutChange = (e, {name, value}) => {
+        this.setState({timeOut: value}, this.checkErrors);
+    };
+
+    handleECCReqChange = () => {
+        const {eccReqChecked} = this.state;
+        this.setState({eccReqChecked: !eccReqChecked});
+    };
 
     handleSubmit = () => {
         const {name, email, phoneNum, idType, idNumber, refEmpId, timeOut, eccReqChecked} = this.state;
@@ -86,7 +96,7 @@ class GetDetailsFamily extends Component {
     };
 
     render() {
-        const {eccReq, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
+        const {eccReqChecked, timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
         return (
             <Grid style={{fontSize: '140%'}}>
                 <Grid.Row>
@@ -117,13 +127,26 @@ class GetDetailsFamily extends Component {
                                                    onChange={this.handleIDProofNumChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={4}>Enter reference employee's Id</Grid.Column>
+                    <Grid.Column width={4}>Enter reference employee's email Id</Grid.Column>
                     <Grid.Column width={12}><Input style={{width: '100%'}} value={refEmpId}
                                                    onChange={this.handleRefEmpIDChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
+                    <Grid.Column width={4}>Expected Time out</Grid.Column>
                     <Grid.Column width={12}>
-                        <Checkbox checked={eccReq}
+                        <DateTimeInput
+                            closable
+                            name="dateTime"
+                            placeholder="Date Time"
+                            iconPosition="left"
+                            value={timeOut}
+                            onChange={this.handleTimeOutChange}
+                            style={{width: '100%'}}/>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column width={12}>
+                        <Checkbox checked={eccReqChecked}
                                   style={{fontSize: '100%', marginTop: '4%', marginBottom: '3%', marginLeft: '7%'}}
                                   toggle label='I require accommodation in ECC' onChange={this.handleECCReqChange}/>
                     </Grid.Column>
@@ -131,7 +154,7 @@ class GetDetailsFamily extends Component {
                 <Grid.Row>
                     <Grid.Column>
                         <Button type="submit" disabled={!submittable} content="Submit" positive size="huge"
-                                onClick={this.props.onSubmit}/>
+                                onClick={this.handleSubmit}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
