@@ -28,15 +28,15 @@ class Home extends Component {
 
     render() {
         return (
-        		<div style={{backgroundImage: 'url("images/b2.jpg")', backgroundRepeat:'no-repeat',backgroundSize:'cover',paddingTop:'10%'}}>
+        		<div style={{backgroundImage: 'url("images/b2.jpg")', backgroundRepeat:'no-repeat',backgroundSize:'cover',paddingTop:'10%'}} className='visitor-background'>
                 <Header />
                 <Grid columns={2} centered style={{height: '90vh'}}>
                     <Grid.Row verticalAlign='middle'>
-                        <Grid.Column width={9} style={{ marginTop: '-15%', paddingLeft: '10%'}}>
-                            <h1 className='h1'>Welcome to VisitorManagement System</h1>
+                        <Grid.Column width={9} style={{ marginTop: '0%', paddingLeft: '5%', paddingBottom: '5%'}}>
+                            <h1 className='h1'>Welcome to Infosys</h1>
                         </Grid.Column>
                         <Grid.Column width={6}
-                                     style={{paddingTop: '5%',marginTop: '-10%'}}>
+                                     style={{paddingTop: '5%',marginTop: '0%'}}>
                             <Link to="/approvedVisitor">
                                 <Button content='Pre-approved Visitor' size='huge' primary className='visitor-btn'
                                         style={{marginBottom: '25%', marginLeft: '15%',padding:'10%'}}/>

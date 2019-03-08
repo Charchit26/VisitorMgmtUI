@@ -31,3 +31,16 @@
     transform: rotate(360deg);
   }
 }
+.ui.button {
+  border-radius: 2.5rem;
+ opacity: 1.0;
+}
+.visitor-background {
+  opacity: 0.9;
+}
+.h1 {
+  font-family: "red-serifs";
+  font-style: oblique;
+  font-size: 5.5em;
+  font-color: red;
+}
