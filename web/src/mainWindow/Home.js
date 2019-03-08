@@ -39,7 +39,7 @@ class Home extends Component {
                                      style={{paddingTop: '5%',marginTop: '0%'}}>
                             <Link to="/approvedVisitor">
                                 <Button content='Pre-approved Visitor' size='huge' primary className='visitor-btn'
-                                        style={{marginBottom: '25%', marginLeft: '15%',padding:'10%'}}/>
+                                        style={{marginBottom: '25%', marginLeft: '15%',padding:'10%',backgroundColor: '#f48942'}}/>
                             </Link>
                             <br/>
                             <Link to="/freshVisitor">
