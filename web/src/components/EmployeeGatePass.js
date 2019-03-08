@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Header, Icon, Image, Item, Segment, Table} from 'semantic-ui-react';
+import {Button, Header, Icon, Item, Segment, Table} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
 class EmployeeGatePass extends Component {
@@ -15,7 +15,8 @@ class EmployeeGatePass extends Component {
                 </Link>
                 <Segment style={{margin: '5% 20% 0% 20%'}}>
                     <Item style={{width: '100%'}}>
-                        <Item.Image src={details.photo? details.photo : '/images/guest.png'} size='small' floated='left'/>
+                        <Item.Image src={details.photo ? details.photo : '/images/guest.png'} size='small'
+                                    floated='left'/>
 
                         <Item.Content>
                             <Table basic='very' collapsing>
