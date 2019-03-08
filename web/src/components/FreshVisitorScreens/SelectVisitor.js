@@ -6,7 +6,7 @@ class SelectVisitor extends Component {
     render() {
         return (
             <div>
-                <h1><u>Please select your visitor type:</u></h1><br/><br/>
+                <h1><u>Please select your visitor type</u></h1><br/><br/>
                 <Card.Group centered>
                     <DisplayCard header="Family Member" title='FAM' onClick={this.props.onSelect}
                                  image='/images/family.png'/>

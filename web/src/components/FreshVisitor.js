@@ -5,7 +5,7 @@ import GetDetailsFamily from './FreshVisitorScreens/GetDetailsFamily';
 import GetDetailsInterviewee from './FreshVisitorScreens/GetDetailsInterviewee';
 import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
-import GatePass from './FreshVisitorScreens/GatePass';
+import EmployeeGatePass from './EmployeeGatePass';
 import {Link} from 'react-router-dom';
 
 class FreshVisitor extends Component {
@@ -67,7 +67,7 @@ class FreshVisitor extends Component {
                         {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
                                                                                       handleTimeOutChange={this.handleTimeOutChange}
                                                                                       onSubmit={this.handleSubmit}/>}
-                        {pageShown === 3 && <GatePass/>}
+                        {pageShown === 3 && <EmployeeGatePass/>}
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
                     {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}

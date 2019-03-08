@@ -2,15 +2,9 @@ import React, {Component} from 'react';
 import {Button, Header, Icon, Image, Item, Segment, Table} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-class GatePass extends Component {
+class EmployeeGatePass extends Component {
     render() {
-        //const details = this.props.location.props.details;
-        const details = {
-            "employeeId": 721791,
-            "employeeName": "Gurpreet",
-            "email": "gurpreet@infy.com",
-            "photo": null
-        };
+        const details = this.props.location.props.details;
         return (
             <div>
                 <Link to='/'>
@@ -67,9 +61,6 @@ class GatePass extends Component {
                         </Item.Content>
                     </Item>
                 </Segment>
-                <Segment style={{margin: '10% 20% 0% 20%'}}>
-                    <Image style={{marginLeft: '40%'}} src='/images/guest.png' size='small'/>
-                </Segment>
                 <br/>
                 <Button content='Print' positive onClick={() => {
                     alert("printing ...")
@@ -79,4 +70,4 @@ class GatePass extends Component {
     }
 }
 
-export default GatePass;
+export default EmployeeGatePass;

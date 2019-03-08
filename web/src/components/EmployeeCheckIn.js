@@ -1,29 +1,26 @@
 import React, {Component} from 'react';
 import {Button, Header, Input, Modal} from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
-
+import {withRouter} from 'react-router-dom';
 
 class EmployeeCheckIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            emailAdd: '',
+            empId: '',
             imageSrc: '',
-            showGatePass: false,
         }
     }
 
-    handleEmailChange = (e) => {
-        this.setState({emailAdd: e.target.value})
+    handleIdChange = (e) => {
+        this.setState({empId: e.target.value})
     };
 
     handleEmpClick = () => {
-        console.log(this.state.emailAdd)
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/'+this.state.empId)
             .then(response => response.json())
             .then((json) => {
                 console.log(json);
-                this.setState({showGatePass: true})
+                this.props.history.push({pathname: '/empGatePass', props: {details: json}, })
             })
     };
 
@@ -41,17 +38,13 @@ class EmployeeCheckIn extends Component {
                     <Modal.Content image>
                         {/*<WebcamCapture setImage={this.getEmployeeImage}/>*/}
                         <Modal.Description>
-                            <Header>Enter your official email ID</Header>
-                            <Input label={{basic: true, content: '@infy.com'}}
-                                   labelPosition='right' placeholder='email id...' onChange={this.handleEmailChange}/>
+                            <Header>Enter your employee ID</Header>
                             <br/>
-                            <br/>
-                            <br/>
-                            <Link to={{pathname: '/gatePass', details: {name: this.state.emailAdd}}}>
-                                <Button content='Get My Gate Pass'
-                                        positive
-                                        onClick={this.handleEmpClick}/>
-                            </Link>
+                            <Input autoFocus placeholder='Employee ID...' onChange={this.handleIdChange}/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button content='Get My Gate Pass'
+                                    positive
+                                    onClick={this.handleEmpClick}/>
                         </Modal.Description>
                     </Modal.Content>
                 </Modal>
@@ -60,4 +53,4 @@ class EmployeeCheckIn extends Component {
     }
 }
 
-export default EmployeeCheckIn;
+export default withRouter(EmployeeCheckIn);
