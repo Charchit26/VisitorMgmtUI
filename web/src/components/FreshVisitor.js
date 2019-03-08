@@ -5,8 +5,8 @@ import GetDetailsFamily from './FreshVisitorScreens/GetDetailsFamily';
 import GetDetailsInterviewee from './FreshVisitorScreens/GetDetailsInterviewee';
 import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
-import EmployeeGatePass from './EmployeeGatePass';
 import {Link} from 'react-router-dom';
+import GatePass from './FreshVisitorScreens/GatePass';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -14,13 +14,10 @@ class FreshVisitor extends Component {
         this.state = {
             pageShown: 1,
             visitorType: '',
-            timeIn: new Date().getTime(),
-            timeOut: (new Date().getTime() + 4 * 60 * 60 * 1000),
         }
     }
 
     handleVisitorSelect = (e, data) => {
-        console.log(data)
         this.setState({visitorType: data.title, pageShown: 2});
     };
     handleBackClick = () => {
@@ -38,8 +35,7 @@ class FreshVisitor extends Component {
     };
 
     render() {
-        const {pageShown, visitorType, timeOut} = this.state;
-        console.log(timeOut)
+        const {pageShown, visitorType} = this.state;
         return (
             <div>
                 <Link to='/'>
@@ -61,7 +57,7 @@ class FreshVisitor extends Component {
                         <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
                         {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
                         {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest onSubmit={this.handleSubmit}/>}
-                        {pageShown === 3 && <EmployeeGatePass/>}
+                        {pageShown === 3 && <GatePass/>}
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
                     {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}
