@@ -27,11 +27,7 @@ class FreshVisitor extends Component {
         this.setState((prevState) => ({pageShown: prevState.pageShown - 1}))
     };
 
-    handleTimeOutChange = (e, data) => {
-        this.setState({timeOut: data.value}, () => console.log(this.state.timeOut));
-    };
-
-    handleSubmit = () => {
+    handleSubmit = (details) => {
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'post',
         }).then(response => response.json())
@@ -52,7 +48,7 @@ class FreshVisitor extends Component {
                         <Icon name='home' size='big'/>
                     </div>
                 </Link>
-                <Segment.Group horizontal style={{marginTop: '20%'}}>
+                <Segment.Group horizontal style={{marginTop: '5%'}}>
                     {pageShown !== 1 &&
                     <div>
                         <Icon size='huge' name='arrow alternate circle left' onClick={this.handleBackClick}/>
@@ -64,9 +60,7 @@ class FreshVisitor extends Component {
                         {pageShown === 2 && visitorType === 'INT' &&
                         <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
                         {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
-                        {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest timeout={timeOut}
-                                                                                      handleTimeOutChange={this.handleTimeOutChange}
-                                                                                      onSubmit={this.handleSubmit}/>}
+                        {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest onSubmit={this.handleSubmit}/>}
                         {pageShown === 3 && <EmployeeGatePass/>}
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
