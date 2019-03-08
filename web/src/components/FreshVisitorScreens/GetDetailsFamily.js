@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Dropdown, Grid, Input} from 'semantic-ui-react';
-import {IDType} from '../../constants/IDProofType';
+import {IDType} from '../../constants/Constants';
 
 class GetDetailsFamily extends Component {
     constructor(props) {
@@ -109,7 +109,7 @@ class GetDetailsFamily extends Component {
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        <Button type="submit" disabled={!submittable} content="Submit"
+                        <Button type="submit" disabled={!submittable} content="Submit" positive size="huge"
                                 onClick={this.props.onSubmit}/>
                     </Grid.Column>
                 </Grid.Row>

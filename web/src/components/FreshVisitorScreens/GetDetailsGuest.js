@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Dropdown, Grid, Input} from 'semantic-ui-react';
+import {Button, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
 import {DateTimeInput} from 'semantic-ui-calendar-react';
-import {IDType} from '../../constants/IDProofType';
+import {IDType, THIS_CITY} from '../../constants/Constants';
 
 class GetDetailsGuest extends Component {
     constructor(props) {
@@ -19,6 +19,8 @@ class GetDetailsGuest extends Component {
             refEmpId: '',
             emailError: false,
             phoneNumError: false,
+
+            jobLevelError: false,
         }
     }
 
@@ -72,15 +74,45 @@ class GetDetailsGuest extends Component {
         this.setState({timeOut: value}, this.checkErrors);
     };
 
-    handleSubmit = () => {
-        let details = {
+    checkJobLevel = (e) => {
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/searchEmployee/' + e.target.value+'@infosys.com', {
+            method: 'GET',
+        })
+            .then(response => response.json())
+            .then((json) => {
+                if (json.jobLevel && json.jobLevel >= 5) {
+                    this.setState({jobLevelError: false})
+                } else {
+                    this.setState({jobLevelError: true})
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+                this.setState({jobLevelError: true})
+            })
+    };
 
-        }
+    handleSubmit = () => {
+        const {name, email, phoneNum, idType, idNumber, refEmpId, timeOut} = this.state;
+        let details = {
+            visitorType: "Guest",
+            name: name,
+            photo: '',
+            dateTimeAllowedFrom: new Date().toISOString(),
+            dateTimeAllowedTo: timeOut.toISOString(),
+            idType: idType,
+            govtId: idNumber,
+            phoneNumber: phoneNum,
+            email: email,
+            accomodationReq: '',
+            empMail: refEmpId,
+            location: THIS_CITY
+        };
         this.props.onSubmit(details);
     };
 
     render() {
-        const {timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
+        const {timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError, jobLevelError} = this.state;
         return (
             <Grid style={{fontSize: '140%'}}>
                 <Grid.Row>
@@ -111,9 +143,16 @@ class GetDetailsGuest extends Component {
                                                    onChange={this.handleIDProofNumChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={4}>Enter reference employee's Id</Grid.Column>
-                    <Grid.Column width={12}><Input style={{width: '100%'}} value={refEmpId}
-                                                   onChange={this.handleRefEmpIDChange}/></Grid.Column>
+                    <Grid.Column width={4}>Enter reference employee's email</Grid.Column>
+                    <Grid.Column width={12}><Input style={{width: '100%'}} value={refEmpId} error={jobLevelError}
+                                                   label={{basic: true, content: '@infosys.com'}}
+                                                   labelPosition='right'
+                                                   onChange={this.handleRefEmpIDChange}
+                                                   onBlur={this.checkJobLevel}/></Grid.Column>
+                    {jobLevelError &&
+                    <Message style={{marginLeft: '1%'}} negative size='mini'>
+                        <p>Please enter a valid email ID of an employee with JL >= 5</p>
+                    </Message>}
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={4}>Expected Time out</Grid.Column>
@@ -130,7 +169,7 @@ class GetDetailsGuest extends Component {
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
-                        <Button type="submit" disabled={!submittable} content="Submit"
+                        <Button type="submit" disabled={!submittable} content="Submit" positive size="huge"
                                 onClick={this.props.onSubmit}/>
                     </Grid.Column>
                 </Grid.Row>
