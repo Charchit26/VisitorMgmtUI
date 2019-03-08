@@ -32,6 +32,7 @@ class FreshVisitor extends Component {
 
     handleSubmit = (details) => {
         const {imageSrc} = this.state;
+        //TODO Make request to submitRequest API
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'post',
         }).then(response => response.json())
@@ -81,7 +82,8 @@ class FreshVisitor extends Component {
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
                 </Segment.Group>
-                <ClickPicture  modalOpen={this.state.clickPictureModalOpen} closeModal={this.closePictureModal} setImageSrc={this.setImageSrc}/>
+                <ClickPicture modalOpen={this.state.clickPictureModalOpen} closeModal={this.closePictureModal}
+                              setImageSrc={this.setImageSrc}/>
                 <VisitorRegisterSuccess modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
             </div>
         )

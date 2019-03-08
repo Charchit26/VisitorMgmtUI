@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Header, Input, Message, Modal} from 'semantic-ui-react';
+import {Message, Modal} from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 
 class VisitorRegisterSuccess extends Component {

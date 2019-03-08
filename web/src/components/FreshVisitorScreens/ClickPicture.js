@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Header, Input, Message, Modal} from 'semantic-ui-react';
+import {Modal} from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 import WebcamCapture from '../WebcamCapture';
 
@@ -10,6 +10,7 @@ class ClickPicture extends Component {
         this.props.closeModal();
         console.log(imageSrc)
     };
+
     render() {
         return (
             <div>

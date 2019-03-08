@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
+import {Button, Checkbox, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
 import {DateTimeInput} from 'semantic-ui-calendar-react';
 import {IDType, THIS_CITY} from '../../constants/Constants';
 
@@ -19,6 +19,7 @@ class GetDetailsGuest extends Component {
             refEmpId: '',
             emailError: false,
             phoneNumError: false,
+            eccReqChecked: false,
 
             jobLevelError: false,
         }
@@ -74,8 +75,13 @@ class GetDetailsGuest extends Component {
         this.setState({timeOut: value}, this.checkErrors);
     };
 
+    handleECCReqChange = () => {
+        const {eccReqChecked} = this.state;
+        this.setState({eccReqChecked: !eccReqChecked});
+    };
+
     checkJobLevel = (e) => {
-        fetch('https://visitor-management-svc.cfapps.io/api/v1/searchEmployee/' + e.target.value+'@infosys.com', {
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/searchEmployee/' + e.target.value + '@infosys.com', {
             method: 'GET',
         })
             .then(response => response.json())
@@ -93,18 +99,18 @@ class GetDetailsGuest extends Component {
     };
 
     handleSubmit = () => {
-        const {name, email, phoneNum, idType, idNumber, refEmpId, timeOut} = this.state;
+        const {name, email, phoneNum, idType, idNumber, refEmpId, timeOut, eccReqChecked} = this.state;
         let details = {
             visitorType: "Guest",
             name: name,
             photo: '',
             dateTimeAllowedFrom: new Date().toISOString(),
-            dateTimeAllowedTo: timeOut.toISOString(),
+            dateTimeAllowedTo: timeOut,
             idType: idType,
             govtId: idNumber,
             phoneNumber: phoneNum,
             email: email,
-            accomodationReq: '',
+            accomodationReq: eccReqChecked,
             empMail: refEmpId,
             location: THIS_CITY
         };
@@ -112,7 +118,7 @@ class GetDetailsGuest extends Component {
     };
 
     render() {
-        const {timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError, jobLevelError} = this.state;
+        const {eccReqChecked, timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError, jobLevelError} = this.state;
         return (
             <Grid style={{fontSize: '140%'}}>
                 <Grid.Row>
@@ -168,9 +174,16 @@ class GetDetailsGuest extends Component {
                     </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
+                    <Grid.Column width={12}>
+                        <Checkbox checked={eccReqChecked}
+                                  style={{fontSize: '100%', marginTop: '4%', marginBottom: '3%', marginLeft: '7%'}}
+                                  toggle label='I require accommodation in ECC' onChange={this.handleECCReqChange}/>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
                     <Grid.Column>
                         <Button type="submit" disabled={!submittable} content="Submit" positive size="huge"
-                                onClick={this.props.onSubmit}/>
+                                onClick={this.handleSubmit}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Dropdown, Grid, Input} from 'semantic-ui-react';
-import {IDType} from '../../constants/Constants';
+import {Button, Checkbox, Dropdown, Grid, Input} from 'semantic-ui-react';
+import {IDType, THIS_CITY} from '../../constants/Constants';
 
 class GetDetailsFamily extends Component {
     constructor(props) {
@@ -67,12 +67,26 @@ class GetDetailsFamily extends Component {
 
 
     handleSubmit = () => {
-        let details = {}
+        const {name, email, phoneNum, idType, idNumber, refEmpId, timeOut, eccReqChecked} = this.state;
+        let details = {
+            visitorType: "Family",
+            name: name,
+            photo: '',
+            dateTimeAllowedFrom: new Date().toISOString(),
+            dateTimeAllowedTo: timeOut,
+            idType: idType,
+            govtId: idNumber,
+            phoneNumber: phoneNum,
+            email: email,
+            accomodationReq: eccReqChecked,
+            empMail: refEmpId,
+            location: THIS_CITY
+        };
         this.props.onSubmit(details);
     };
 
     render() {
-        const {submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
+        const {eccReq, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
         return (
             <Grid style={{fontSize: '140%'}}>
                 <Grid.Row>
@@ -106,6 +120,13 @@ class GetDetailsFamily extends Component {
                     <Grid.Column width={4}>Enter reference employee's Id</Grid.Column>
                     <Grid.Column width={12}><Input style={{width: '100%'}} value={refEmpId}
                                                    onChange={this.handleRefEmpIDChange}/></Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column width={12}>
+                        <Checkbox checked={eccReq}
+                                  style={{fontSize: '100%', marginTop: '4%', marginBottom: '3%', marginLeft: '7%'}}
+                                  toggle label='I require accommodation in ECC' onChange={this.handleECCReqChange}/>
+                    </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column>
