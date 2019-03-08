@@ -3,3 +3,5 @@ export const IDType = [
     {text: 'Voter ID Card', value: 'VO'},
     {text: 'Passport', value: 'PA'},
 ];
+
+export const THIS_CITY = 'Pune';

@@ -7,6 +7,8 @@ import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
 import {Link} from 'react-router-dom';
 import GatePass from './FreshVisitorScreens/GatePass';
+import VisitorRegisterSuccess from './FreshVisitorScreens/VisitorRegisterSuccess';
+import ClickPicture from './FreshVisitorScreens/ClickPicture';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -14,6 +16,10 @@ class FreshVisitor extends Component {
         this.state = {
             pageShown: 1,
             visitorType: '',
+            modalOpen: false,
+
+            clickPictureModalOpen: false,
+            imageSrc: '',
         }
     }
 
@@ -25,13 +31,27 @@ class FreshVisitor extends Component {
     };
 
     handleSubmit = (details) => {
+        const {imageSrc} = this.state;
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'post',
         }).then(response => response.json())
             .then((json) => {
                 console.log(json);
-                this.setState({pageShown: 3});
+                this.setState({clickPictureModalOpen: true});
             })
+    };
+
+    closeModal = () => {
+        this.setState({modalOpen: false});
+        this.props.history.push('/')
+    };
+
+    closePictureModal = () => {
+        this.setState({clickPictureModalOpen: false, modalOpen: true});
+    };
+
+    setImageSrc = (img) => {
+        this.setState({imageSrc: img});
     };
 
     render() {
@@ -60,8 +80,9 @@ class FreshVisitor extends Component {
                         {pageShown === 3 && <GatePass/>}
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
-                    {/*<Segment><Icon size='huge' name='arrow alternate circle right'/></Segment>*/}
                 </Segment.Group>
+                <ClickPicture  modalOpen={this.state.clickPictureModalOpen} closeModal={this.closePictureModal} setImageSrc={this.setImageSrc}/>
+                <VisitorRegisterSuccess modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
             </div>
         )
     }
