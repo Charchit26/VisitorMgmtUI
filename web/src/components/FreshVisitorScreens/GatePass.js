@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
-import {Button, Header, Image, Item, Segment, Table} from 'semantic-ui-react';
+import {Button, Header, Icon, Image, Item, Segment, Table} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 class GatePass extends Component {
     render() {
-        //const details = this.props.location.props.details;
-        const details = {
-            "employeeId": 721791,
-            "employeeName": "Gurpreet",
-            "email": "gurpreet@infy.com",
-            "photo": null
-        };
+        const details = this.props.location.props.details;
+        // const details = {
+        //     "employeeId": 721791,
+        //     "employeeName": "Gurpreet",
+        //     "email": "gurpreet@infy.com",
+        //     "photo": null
+        // };
         return (
             <div>
+                <Link to='/'>
+                    <div style={{marginLeft: '-90%', marginTop: '2%'}}>
+                        <p>Home</p>
+                        <Icon name='home' size='big'/>
+                    </div>
+                </Link>
                 <Segment style={{margin: '5% 20% 0% 20%'}}>
                     <Item style={{width: '100%'}}>
                         <Item.Image src={details.photo ? details.photo : '/images/guest.png'} size='small'

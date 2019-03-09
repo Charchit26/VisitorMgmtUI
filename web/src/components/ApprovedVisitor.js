@@ -4,6 +4,45 @@ import QRReader from './QRReader';
 import {Link} from 'react-router-dom';
 
 class ApprovedVisitor extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            visitorId: '',
+        }
+    }
+    handleSearch = () => {
+        const {visitorId} = this.state;
+        console.log(visitorId)
+
+        //TODO API call for visitor ID
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/' + 744781)
+            .then(response => response.json())
+            .then((json) => {
+                console.log(json);
+                this.props.history.push({pathname: '/gatePass', props: {details: json},})
+            }).catch((err) => {
+            console.log(err);
+            this.props.history.push({pathname: '/empGatePassError'})
+        })
+    };
+
+    handleQRSearch = () => {
+        //TODO API call for QR code
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/' + 744781)
+            .then(response => response.json())
+            .then((json) => {
+                console.log(json);
+                this.props.history.push({pathname: '/gatePass', props: {details: json},})
+            }).catch((err) => {
+            console.log(err);
+            this.props.history.push({pathname: '/empGatePassError'})
+        })
+    };
+
+    handleInputChnage = (e) => {
+        this.setState({visitorId: e.target.value})
+    };
+
     render() {
         return (
             <div>
@@ -19,7 +58,7 @@ class ApprovedVisitor extends Component {
                 <Segment placeholder>
                     <Grid columns={2} relaxed='very' stackable>
                         <Grid.Column width={8} floated='left'>
-                            <QRReader/>
+                            <QRReader handleQRsearch={this.handleQRSearch}/>
                         </Grid.Column>
 
                         <Grid.Column verticalAlign='middle' width={8}>
@@ -28,9 +67,11 @@ class ApprovedVisitor extends Component {
                                     <Icon name='search'/>
                                     Enter Code manually
                                 </Header><br/>
-                                <Input autoFocus action={{icon: 'search', size: 'huge'}}
+                                <Input autoFocus action={{icon: 'search', size: 'huge', onClick: this.handleSearch}}
                                        placeholder='Search...'
-                                       style={{width: '70%', height: '60px', fontSize: '170%'}}/>
+                                       value={this.state.visitorId}
+                                       onChange={this.handleInputChnage}
+                                       style={{width: '70%', height: '60px', fontSize: '170%'}} />
                             </div>
                         </Grid.Column>
                     </Grid>

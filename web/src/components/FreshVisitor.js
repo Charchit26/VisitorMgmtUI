@@ -41,10 +41,10 @@ class FreshVisitor extends Component {
     };
 
     closePictureModal = () => {
-        const {imageSrc} = this.state;
-        this.setState({details: {...this.state.details, photo: imageSrc}})
-        let data = JSON.stringify(this.state.details);
-        console.log(data)
+        const detailCopy = this.state.details;
+        detailCopy.photo = this.state.imageSrc;
+        let data = JSON.stringify(detailCopy);
+        console.log("=++++++>>>>",detailCopy)
         fetch('https://visitor-management-svc.cfapps.io/api/v1/submitRequest',
             {
                 method: 'post',
@@ -62,7 +62,9 @@ class FreshVisitor extends Component {
     };
 
     setImageSrc = (img) => {
-        this.setState({imageSrc: img}, this.closePictureModal);
+        this.setState({imageSrc: img}, () => {
+            this.closePictureModal();
+        })
     };
 
     render() {
@@ -75,7 +77,7 @@ class FreshVisitor extends Component {
                         <Icon name='home' size='big'/>
                     </div>
                 </Link>
-                <Segment.Group horizontal style={{marginTop: '5%'}}>
+                <Segment.Group horizontal style={{marginTop: '3%'}}>
                     {pageShown !== 1 &&
                     <div>
                         <Icon size='huge' name='arrow alternate circle left' onClick={this.handleBackClick}/>

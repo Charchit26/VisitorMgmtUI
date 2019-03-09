@@ -13,8 +13,8 @@ class EmployeeGatePassError extends Component {
                     </div>
                 </Link>
                 <Message negative>
-                    <Message.Header>We're sorry we can't verify this Employee ID at this time</Message.Header>
-                    <p>Either the employee Id mentioned is wrong or there is some issue with the server</p>
+                    <Message.Header>We're sorry we can't verify this ID at this time</Message.Header>
+                    <p>Either the Id mentioned is wrong or there is some issue with the server</p>
                 </Message>
             </div>
         )

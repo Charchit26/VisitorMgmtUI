@@ -7,6 +7,7 @@ import FreshVisitor from './components/FreshVisitor';
 import EmployeeGatePass from './components/EmployeeGatePass';
 import WebcamCapture from './components/WebcamCapture';
 import EmployeeGatePassError from './components/EmployeeGatePassError';
+import GatePass from './components/FreshVisitorScreens/GatePass';
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
                     <Route exact path="/approvedVisitor" component={ApprovedVisitor}/>
                     <Route exact path="/freshVisitor" component={FreshVisitor}/>
                     <Route exact path="/empGatePass" render={(props) => <EmployeeGatePass {...props}/>}/>
+                    <Route exact path="/gatePass" render={(props) => <GatePass {...props}/>}/>
                     <Route exact path="/empGatePassError" component={EmployeeGatePassError}/>
                 </div>
             </Router>

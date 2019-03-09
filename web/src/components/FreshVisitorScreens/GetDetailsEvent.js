@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Checkbox, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
-import {events, eventsType, IDType, THIS_CITY} from '../../constants/Constants';
+import {eventsType, IDType, THIS_CITY} from '../../constants/Constants';
 
 class GetDetailsEvent extends Component {
     constructor(props) {
