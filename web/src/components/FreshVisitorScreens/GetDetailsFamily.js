@@ -97,7 +97,7 @@ class GetDetailsFamily extends Component {
     };
 
     render() {
-        const {eccReqChecked, timeOut, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
+        const {eccReqChecked, submittable, name, email, phoneNum, idType, idNumber, refEmpId, emailError, phoneNumError} = this.state;
         return (
             <Grid style={{fontSize: '140%'}}>
                 <Grid.Row>

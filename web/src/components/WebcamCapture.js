@@ -20,15 +20,15 @@ class WebcamCapture extends React.Component {
         return (
             <div>
                 <Webcam
-                    styel={{marginLeft: '30%'}}
+                    style={{marginLeft: '100%'}}
                     audio={false}
                     height={350}
                     ref={this.setRef}
                     screenshotFormat="image/jpeg"
                     width={350}
                     videoConstraints={videoConstraints}
-                />
-                <Button onClick={this.capture}>Click Me!</Button>
+                /><br/>
+                <Button style={{marginLeft: '125%'}} size="huge" onClick={this.capture}>Click Me!</Button>
             </div>
         );
     }

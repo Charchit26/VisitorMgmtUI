@@ -16,12 +16,15 @@ class EmployeeCheckIn extends Component {
     };
 
     handleEmpClick = () => {
-        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/'+this.state.empId)
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/' + this.state.empId)
             .then(response => response.json())
             .then((json) => {
                 console.log(json);
-                this.props.history.push({pathname: '/empGatePass', props: {details: json}, })
-            })
+                this.props.history.push({pathname: '/empGatePass', props: {details: json},})
+            }).catch((err) => {
+            console.log(err);
+            this.props.history.push({pathname: '/empGatePassError'})
+        })
     };
 
     getEmployeeImage = (imageSrc) => {

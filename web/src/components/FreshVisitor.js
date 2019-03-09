@@ -41,9 +41,9 @@ class FreshVisitor extends Component {
 
     closePictureModal = () => {
         const {imageSrc} = this.state;
-        this.setState({details: {...this.state.details, photo: imageSrc}}, () => {
-            console.log(this.state.details)
-        });
+        // this.setState({details: {...this.state.details, photo: imageSrc}}, () => {
+        //     console.log(this.state.details)
+        // });
         let data = JSON.stringify(this.state.details);
         console.log(data)
         fetch('https://visitor-management-svc.cfapps.io/api/v1/submitRequest',
@@ -53,10 +53,12 @@ class FreshVisitor extends Component {
                 body: data,
             }).then(response => {
             if (response.status === 201) {
+                response.json();
                 this.setState({clickPictureModalOpen: false, modalOpen: true});
             } else {
                 return Promise.reject(response)
-            }})
+            }
+        })
             .then(() => {
                 console.log('Success');
             })
