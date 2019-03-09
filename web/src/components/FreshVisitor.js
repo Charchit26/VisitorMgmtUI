@@ -9,7 +9,6 @@ import GatePass from './FreshVisitorScreens/GatePass';
 import VisitorRegisterSuccess from './FreshVisitorScreens/VisitorRegisterSuccess';
 import ClickPicture from './FreshVisitorScreens/ClickPicture';
 import GetDetailsEvent from './FreshVisitorScreens/GetDetailsEvent';
-import LZString from 'lz-string';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -43,9 +42,9 @@ class FreshVisitor extends Component {
 
     closePictureModal = () => {
         const detailCopy = this.state.details;
-        detailCopy.photo =  LZString.compress(this.state.imageSrc);
+        detailCopy.photo = this.state.imageSrc;
         let data = JSON.stringify(detailCopy);
-        console.log("=++++++>>>>",detailCopy)
+        console.log("=++++++>>>>", detailCopy)
         fetch('https://visitor-management-svc.cfapps.io/api/v1/submitRequest',
             {
                 method: 'post',
