@@ -13,10 +13,7 @@ class ApprovedVisitor extends Component {
 
     handleSearch = () => {
         const {visitorId} = this.state;
-        console.log(visitorId)
-
-        //TODO API call for visitor ID
-        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/' + 744781)
+        fetch('https://dataservice.cfapps.io/dataSvc/api/v1/visitor?visitorId=' + visitorId)
             .then(response => response.json())
             .then((json) => {
                 console.log(json);

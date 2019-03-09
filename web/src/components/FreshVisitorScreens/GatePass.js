@@ -3,15 +3,37 @@ import {Button, Header, Icon, Image, Item, Segment, Table} from 'semantic-ui-rea
 import {Link} from 'react-router-dom';
 
 class GatePass extends Component {
+    constructor() {
+        super();
+        this.state = {
+            qrCode: '',
+        }
+    }
+
+    componentWillMount() {
+        this.generateQR(this.props.location.props.details);
+    }
+
+    generateQR = (data) => {
+        fetch('https://qr-manager.cfapps.io/qr-manager/generateInBytes',
+            {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {'Content-Type': 'application/json', 'Accept': 'image/png'},
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                let img = URL.createObjectURL(blob)
+                this.setState({qrCode: img})
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
+
     render() {
         const details = this.props.location.props.details;
         console.log(this.props)
-        // const details = {
-        //     "employeeId": 721791,
-        //     "employeeName": "Gurpreet",
-        //     "email": "gurpreet@infy.com",
-        //     "photo": null
-        // };
         return (
             <div>
                 <Link to='/'>
@@ -36,7 +58,7 @@ class GatePass extends Component {
                                                 </Header.Content>
                                             </Header>
                                         </Table.Cell>
-                                        <Table.Cell>{details.visitorName}</Table.Cell>
+                                        <Table.Cell>{details.name}</Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>
@@ -46,7 +68,7 @@ class GatePass extends Component {
                                                 </Header.Content>
                                             </Header>
                                         </Table.Cell>
-                                        <Table.Cell>{details.uniqueNum}</Table.Cell>
+                                        <Table.Cell>{details.visitorId}</Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>
@@ -66,7 +88,27 @@ class GatePass extends Component {
                                                 </Header.Content>
                                             </Header>
                                         </Table.Cell>
-                                        <Table.Cell>{details.employeeID}</Table.Cell>
+                                        <Table.Cell>{details.empMail}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>
+                                            <Header>
+                                                <Header.Content>
+                                                    Allowed From:
+                                                </Header.Content>
+                                            </Header>
+                                        </Table.Cell>
+                                        <Table.Cell>{details.dateTimeAllowedFrom}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>
+                                            <Header>
+                                                <Header.Content>
+                                                    Allowed Till:
+                                                </Header.Content>
+                                            </Header>
+                                        </Table.Cell>
+                                        <Table.Cell>{details.dateTimeAllowedTo}</Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
                             </Table>
@@ -80,7 +122,7 @@ class GatePass extends Component {
                     </Item>
                 </Segment>
                 <Segment style={{margin: '10% 20% 0% 20%'}}>
-                    <Image style={{marginLeft: '40%'}} src='/images/guest.png' size='small'/>
+                    <Image style={{marginLeft: '40%'}} src={this.state.qrCode} size='small'/>
                 </Segment>
                 <br/>
                 <Button content='Print' positive onClick={() => {
