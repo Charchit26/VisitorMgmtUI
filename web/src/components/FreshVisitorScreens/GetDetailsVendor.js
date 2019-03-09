@@ -112,7 +112,7 @@ class GetDetailsVendor extends Component {
             phoneNumber: phoneNum,
             email: email,
             accomodationReq: eccReqChecked,
-            empMail: refEmpId,
+            empMail: refEmpId+"@infosys.com",
             location: THIS_CITY
         };
         this.props.onSubmit(details);

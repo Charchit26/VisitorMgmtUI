@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Header, Icon, Item, Message, Segment, Table} from 'semantic-ui-react';
+import {Icon, Message} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
 class EmployeeGatePassError extends Component {
