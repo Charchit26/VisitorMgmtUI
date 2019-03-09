@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Checkbox, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
 import {IDType, THIS_CITY} from '../../constants/Constants';
-import {DateTimeInput} from 'semantic-ui-calendar-react';
 
 class GetDetailsVendor extends Component {
     constructor(props) {
@@ -71,8 +70,10 @@ class GetDetailsVendor extends Component {
         this.setState({refEmpId: e.target.value}, this.checkErrors);
     };
 
-    handleTimeOutChange = (e, {name, value}) => {
-        this.setState({timeOut: value}, this.checkErrors);
+    handleTimeOutChange = (e) => {
+        let days = parseInt(e.target.value)
+        let timeOutDate = new Date().addDays(days).toISOString();
+        this.setState({timeOut: timeOutDate}, this.checkErrors);
     };
 
     handleECCReqChange = () => {
@@ -149,7 +150,7 @@ class GetDetailsVendor extends Component {
                                                    onChange={this.handleIDProofNumChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={4}>Enter reference HR's email</Grid.Column>
+                    <Grid.Column width={4}>Enter reference manager's email Id</Grid.Column>
                     <Grid.Column width={12}><Input style={{width: '100%'}} value={refEmpId} error={jobLevelError}
                                                    label={{basic: true, content: '@infosys.com'}}
                                                    labelPosition='right'
@@ -161,17 +162,9 @@ class GetDetailsVendor extends Component {
                     </Message>}
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={4}>Expected Time out</Grid.Column>
-                    <Grid.Column width={12}>
-                        <DateTimeInput
-                            closable
-                            name="dateTime"
-                            placeholder="Date Time"
-                            iconPosition="left"
-                            value={timeOut}
-                            onChange={this.handleTimeOutChange}
-                            style={{width: '100%'}}/>
-                    </Grid.Column>
+                    <Grid.Column width={4}>Enter your expected days of stay</Grid.Column>
+                    <Grid.Column width={12}><Input style={{width: '100%'}}
+                                                   onChange={this.handleTimeOutChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={12}>

@@ -7,7 +7,6 @@ class ClickPicture extends Component {
 
     getEmployeeImage = (imageSrc) => {
         this.props.setImageSrc(imageSrc);
-        this.props.closeModal();
         console.log(imageSrc)
     };
 
@@ -15,7 +14,7 @@ class ClickPicture extends Component {
         return (
             <div>
                 <Modal dimmer='blurring' size='large' closeOnEscape={false}
-                       closeOnDimmerClick={false} open={this.props.modalOpen} onClose={this.props.closeModal}>
+                       closeOnDimmerClick={false} open={this.props.modalOpen}>
                     <Modal.Header>Say Cheeeeeeeese....</Modal.Header>
                     <Modal.Content image>
                         <WebcamCapture setImage={this.getEmployeeImage}/>

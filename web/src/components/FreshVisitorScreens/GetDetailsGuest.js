@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Button, Checkbox, Dropdown, Grid, Input, Message} from 'semantic-ui-react';
-import {DateTimeInput} from 'semantic-ui-calendar-react';
 import {IDType, THIS_CITY} from '../../constants/Constants';
 
 class GetDetailsGuest extends Component {
@@ -71,8 +70,10 @@ class GetDetailsGuest extends Component {
         this.setState({refEmpId: e.target.value}, this.checkErrors);
     };
 
-    handleTimeOutChange = (e, {name, value}) => {
-        this.setState({timeOut: value}, this.checkErrors);
+    handleTimeOutChange = (e) => {
+        let days = parseInt(e.target.value)
+        let timeOutDate = new Date().addDays(days).toISOString();
+        this.setState({timeOut: timeOutDate}, this.checkErrors);
     };
 
     handleECCReqChange = () => {
@@ -161,17 +162,9 @@ class GetDetailsGuest extends Component {
                     </Message>}
                 </Grid.Row>
                 <Grid.Row>
-                    <Grid.Column width={4}>Expected Time out</Grid.Column>
-                    <Grid.Column width={12}>
-                        <DateTimeInput
-                            closable
-                            name="dateTime"
-                            placeholder="Date Time"
-                            iconPosition="left"
-                            value={timeOut}
-                            onChange={this.handleTimeOutChange}
-                            style={{width: '100%'}}/>
-                    </Grid.Column>
+                    <Grid.Column width={4}>Enter your expected days of stay</Grid.Column>
+                    <Grid.Column width={12}><Input style={{width: '100%'}}
+                                                   onChange={this.handleTimeOutChange}/></Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                     <Grid.Column width={12}>

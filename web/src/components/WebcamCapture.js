@@ -1,5 +1,6 @@
 import React from 'react';
 import Webcam from "react-webcam";
+import {Button} from 'semantic-ui-react';
 
 class WebcamCapture extends React.Component {
     setRef = webcam => {
@@ -19,6 +20,7 @@ class WebcamCapture extends React.Component {
         return (
             <div>
                 <Webcam
+                    styel={{marginLeft: '30%'}}
                     audio={false}
                     height={350}
                     ref={this.setRef}
@@ -26,7 +28,7 @@ class WebcamCapture extends React.Component {
                     width={350}
                     videoConstraints={videoConstraints}
                 />
-                <button onClick={this.capture}>Click Me!</button>
+                <Button onClick={this.capture}>Click Me!</Button>
             </div>
         );
     }

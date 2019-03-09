@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import SelectVisitor from './FreshVisitorScreens/SelectVisitor';
 import {Icon, Segment} from 'semantic-ui-react';
 import GetDetailsFamily from './FreshVisitorScreens/GetDetailsFamily';
-import GetDetailsInterviewee from './FreshVisitorScreens/GetDetailsInterviewee';
 import GetDetailsVendor from './FreshVisitorScreens/GetDetailsVendor';
 import GetDetailsGuest from './FreshVisitorScreens/GetDetailsGuest';
 import {Link} from 'react-router-dom';
@@ -20,6 +19,7 @@ class FreshVisitor extends Component {
 
             clickPictureModalOpen: false,
             imageSrc: '',
+            details: {},
         }
     }
 
@@ -30,29 +30,43 @@ class FreshVisitor extends Component {
         this.setState((prevState) => ({pageShown: prevState.pageShown - 1}))
     };
 
-    handleSubmit = (details) => {
-        const {imageSrc} = this.state;
-        //TODO Make request to submitRequest API
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'post',
-        }).then(response => response.json())
-            .then((json) => {
-                console.log(json);
-                this.setState({clickPictureModalOpen: true});
-            })
-    };
-
     closeModal = () => {
         this.setState({modalOpen: false});
         this.props.history.push('/')
     };
 
+    openPictureModal = (details) => {
+        this.setState({details: details, clickPictureModalOpen: true})
+    };
+
     closePictureModal = () => {
-        this.setState({clickPictureModalOpen: false, modalOpen: true});
+        const {imageSrc} = this.state;
+        this.setState({details: {...this.state.details, photo: imageSrc}}, () => {
+            console.log(this.state.details)
+        });
+        let data = JSON.stringify(this.state.details);
+        console.log(data)
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/submitRequest',
+            {
+                method: 'post',
+                headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+                body: data,
+            }).then(response => {
+            if (response.status === 201) {
+                this.setState({clickPictureModalOpen: false, modalOpen: true});
+            } else {
+                return Promise.reject(response)
+            }})
+            .then(() => {
+                console.log('Success');
+            })
+            .catch((err) => {
+                console.log('Erorr Occurred ----------> ', err);
+            });
     };
 
     setImageSrc = (img) => {
-        this.setState({imageSrc: img});
+        this.setState({imageSrc: img}, this.closePictureModal);
     };
 
     render() {
@@ -73,16 +87,19 @@ class FreshVisitor extends Component {
                     }
                     <Segment style={{width: '70%'}}>
                         {pageShown === 1 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
-                        {pageShown === 2 && visitorType === 'FAM' && <GetDetailsFamily onSubmit={this.handleSubmit}/>}
+                        {pageShown === 2 && visitorType === 'FAM' &&
+                        <GetDetailsFamily onSubmit={this.openPictureModal}/>}
                         {pageShown === 2 && visitorType === 'INT' &&
-                        <GetDetailsInterviewee onSubmit={this.handleSubmit}/>}
-                        {pageShown === 2 && visitorType === 'VEN' && <GetDetailsVendor onSubmit={this.handleSubmit}/>}
-                        {pageShown === 2 && visitorType === 'GST' && <GetDetailsGuest onSubmit={this.handleSubmit}/>}
+                        <GetDetailsVendor onSubmit={this.openPictureModal}/>}
+                        {pageShown === 2 && visitorType === 'VEN' &&
+                        <GetDetailsVendor onSubmit={this.openPictureModal}/>}
+                        {pageShown === 2 && visitorType === 'GST' &&
+                        <GetDetailsGuest onSubmit={this.openPictureModal}/>}
                         {pageShown === 3 && <GatePass/>}
                         {pageShown === 4 && <SelectVisitor onSelect={this.handleVisitorSelect}/>}
                     </Segment>
                 </Segment.Group>
-                <ClickPicture modalOpen={this.state.clickPictureModalOpen} closeModal={this.closePictureModal}
+                <ClickPicture modalOpen={this.state.clickPictureModalOpen}
                               setImageSrc={this.setImageSrc}/>
                 <VisitorRegisterSuccess modalOpen={this.state.modalOpen} closeModal={this.closeModal}/>
             </div>
