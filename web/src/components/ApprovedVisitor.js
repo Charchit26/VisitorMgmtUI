@@ -10,6 +10,7 @@ class ApprovedVisitor extends Component {
             visitorId: '',
         }
     }
+
     handleSearch = () => {
         const {visitorId} = this.state;
         console.log(visitorId)
@@ -26,17 +27,22 @@ class ApprovedVisitor extends Component {
         })
     };
 
-    handleQRSearch = () => {
-        //TODO API call for QR code
-        fetch('https://visitor-management-svc.cfapps.io/api/v1/employeeDetails/' + 744781)
+    handleQRSearch = (data) => {
+        fetch('https://visitor-management-svc.cfapps.io/api/v1/validatedata',
+            {
+                method: 'POST',
+                body: data
+            })
             .then(response => response.json())
             .then((json) => {
                 console.log(json);
                 this.props.history.push({pathname: '/gatePass', props: {details: json},})
-            }).catch((err) => {
-            console.log(err);
-            this.props.history.push({pathname: '/empGatePassError'})
-        })
+            })
+            .catch((err) => {
+                console.log(err);
+                this.props.history.push({pathname: '/empGatePassError'})
+
+            })
     };
 
     handleInputChnage = (e) => {
@@ -71,7 +77,7 @@ class ApprovedVisitor extends Component {
                                        placeholder='Search...'
                                        value={this.state.visitorId}
                                        onChange={this.handleInputChnage}
-                                       style={{width: '70%', height: '60px', fontSize: '170%'}} />
+                                       style={{width: '70%', height: '60px', fontSize: '170%'}}/>
                             </div>
                         </Grid.Column>
                     </Grid>

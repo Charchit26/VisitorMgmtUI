@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 class GatePass extends Component {
     render() {
         const details = this.props.location.props.details;
+        console.log(this.props)
         // const details = {
         //     "employeeId": 721791,
         //     "employeeName": "Gurpreet",
@@ -31,21 +32,21 @@ class GatePass extends Component {
                                         <Table.Cell>
                                             <Header>
                                                 <Header.Content>
-                                                    Employee Name:
+                                                    Visitor Name:
                                                 </Header.Content>
                                             </Header>
                                         </Table.Cell>
-                                        <Table.Cell>{details.employeeName}</Table.Cell>
+                                        <Table.Cell>{details.visitorName}</Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>
                                             <Header>
                                                 <Header.Content>
-                                                    Employee ID:
+                                                    Visitor ID:
                                                 </Header.Content>
                                             </Header>
                                         </Table.Cell>
-                                        <Table.Cell>{details.employeeId}</Table.Cell>
+                                        <Table.Cell>{details.uniqueNum}</Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>
@@ -56,6 +57,16 @@ class GatePass extends Component {
                                             </Header>
                                         </Table.Cell>
                                         <Table.Cell>{details ? details.email : 'No Details Available'}</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell>
+                                            <Header>
+                                                <Header.Content>
+                                                    Reference Employee:
+                                                </Header.Content>
+                                            </Header>
+                                        </Table.Cell>
+                                        <Table.Cell>{details.employeeID}</Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
                             </Table>

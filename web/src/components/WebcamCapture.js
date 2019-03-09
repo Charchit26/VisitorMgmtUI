@@ -26,6 +26,7 @@ class WebcamCapture extends React.Component {
                     ref={this.setRef}
                     screenshotFormat="image/jpeg"
                     width={350}
+                    imageSmoothing={false}
                     videoConstraints={videoConstraints}
                 /><br/>
                 <Button style={{marginLeft: '125%'}} size="huge" onClick={this.capture}>Click Me!</Button>

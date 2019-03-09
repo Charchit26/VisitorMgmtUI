@@ -7,15 +7,12 @@ class QRReader extends React.Component {
         super(props);
         this.state = {
             delay: 300,
-            result: "No result"
         };
     }
 
     handleScan = (data) => {
         if (data) {
-            this.setState({
-                result: data
-            }, this.props.handleQRSearch);
+            this.props.handleQRsearch(data);
         }
     };
     handleError = (err) => {
