@@ -11,3 +11,9 @@ Date.prototype.addDays = function (days) {
     date.setDate(date.getDate() + days);
     return date;
 };
+
+export const eventsType = [
+    {text: 'AFE Awards', value: 'AFE Awards'},
+    {text: 'XYZ Conference', value: 'XYZ Conference'},
+    {text: 'Walk-in Interview', value: 'Walk-in Interview', disabled: true},
+];

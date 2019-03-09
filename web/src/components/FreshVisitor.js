@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 import GatePass from './FreshVisitorScreens/GatePass';
 import VisitorRegisterSuccess from './FreshVisitorScreens/VisitorRegisterSuccess';
 import ClickPicture from './FreshVisitorScreens/ClickPicture';
+import GetDetailsEvent from './FreshVisitorScreens/GetDetailsEvent';
 
 class FreshVisitor extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class FreshVisitor extends Component {
                         {pageShown === 2 && visitorType === 'FAM' &&
                         <GetDetailsFamily onSubmit={this.openPictureModal}/>}
                         {pageShown === 2 && visitorType === 'INT' &&
-                        <GetDetailsVendor onSubmit={this.openPictureModal}/>}
+                        <GetDetailsEvent onSubmit={this.openPictureModal}/>}
                         {pageShown === 2 && visitorType === 'VEN' &&
                         <GetDetailsVendor onSubmit={this.openPictureModal}/>}
                         {pageShown === 2 && visitorType === 'GST' &&
